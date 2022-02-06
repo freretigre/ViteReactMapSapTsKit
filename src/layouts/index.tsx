@@ -1,16 +1,20 @@
 import { memo, FC, PropsWithChildren, Suspense, lazy } from 'react';
-import { 
-    Outlet
+import {
+    Link,
+    Outlet,
   } from 'react-router-dom';
 
-const Layouts = memo(() => {
+const Layout = memo(() => {
     return (
-        <>
-            <div><h1>头部</h1></div>
-            { Outlet}
+        <div>
+            <div>
+                <h1>头部</h1>
+                <p><Link to="/">aa</Link></p>
+            </div>
+            <Outlet />
             <div><h1>底部</h1></div>
-        </>
+        </div>
     )
 });
 
-export default Layouts;
+export default Layout;

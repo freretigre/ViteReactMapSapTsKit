@@ -1,11 +1,4 @@
-import { memo, FC, PropsWithChildren, Suspense, lazy } from 'react';
-import { 
-    Route,
-    Routes,
-    NavigateFunction,
-    BrowserRouter,
-    useNavigate
-  } from 'react-router-dom';
+import { memo } from 'react';
 import styles from './index.module.scss';
 
 const Index = memo(() => {
