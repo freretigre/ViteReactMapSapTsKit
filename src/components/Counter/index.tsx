@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 import { Button } from 'antd';
 import { useAppSelector, useAppDispatch } from '../../models/hooks';
-import { actions } from '../../models/actions/hooks';
+import { actions } from '../../models/actions';
 
 import styles from "./index.module.scss";
 
