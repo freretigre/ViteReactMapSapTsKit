@@ -61,7 +61,8 @@ export default defineConfig({
     },
   },
   server: {
-    proxy: {
+    port: 8088, // 默认端口号是 3000，这里我修改成 8088，主要是为了不和其它框框架端口号发生冲突
+    proxy: { // 代理配置
       // 字符串简写写法
       '/foo': 'http://localhost:4567',
       // 选项写法
