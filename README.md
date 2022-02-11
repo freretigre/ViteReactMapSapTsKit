@@ -2,7 +2,7 @@
 
 # 本脚手架使用到的如下库
 ```
-react antd ts cssModule less/scss react-router-dom-v6.0 @reduxjs/toolkit react-redux 
+react antd ts cssModule less/scss react-router-dom-v6.0 @reduxjs/toolkit react-redux redux-Saga rxjs
 
 ```
 
