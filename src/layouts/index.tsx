@@ -2,18 +2,16 @@ import { memo, FC, PropsWithChildren, Suspense, lazy } from 'react';
 import {
     Link,
     Outlet,
-  } from 'react-router-dom';
+} from 'react-router-dom';
+import NavigationMenu from '../components/NavigationMenu';
 
 const Layout = memo(() => {
     return (
-        <div>
-            <div>
-                <h1>头部</h1>
-                <p><Link to="/">aa</Link></p>
-            </div>
+        <>
+            <NavigationMenu />
             <Outlet />
             <div><h1>底部</h1></div>
-        </div>
+        </>
     )
 });
 

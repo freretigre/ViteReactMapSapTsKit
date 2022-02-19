@@ -1,0 +1,14 @@
+.normal{
+    background: #222 linear-gradient(135deg,transparent,rgba(0,0,0,.7));
+    position: relative;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    // align-items: center;
+    :global{
+        .wrap{
+            
+        }
+       
+    }
+}
