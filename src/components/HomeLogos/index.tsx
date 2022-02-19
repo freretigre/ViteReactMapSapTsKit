@@ -13,8 +13,14 @@ import icon_webpack from '../../assets/img/commone/icon_webpack.svg';
 import icon_vite from '../../assets/img/commone/icon_vite.svg';
 import icon_esbuild from '../../assets/img/commone/icon_esbuild.svg';
 
+interface WrapListIcons {
+    id: number;
+    name: string;
+    icon: string;
+}
+
 export default memo(() => {
-    const wrapListIcons = [
+    const wrapListIcons: WrapListIcons[] = [
         {
             id: 1001,
             name: 'JS',
@@ -75,7 +81,7 @@ export default memo(() => {
         <div className={styles.normal}>
             <div className='wrap'>
                 {wrapListIcons.map(item => {
-                    return (<i className='icon'><img src={item.icon} /></i>);
+                    return (<i key={item.id} className='icon'><img src={item.icon} /></i>);
                 })}
             </div>
         </div>
