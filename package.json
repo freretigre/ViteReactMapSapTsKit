@@ -15,7 +15,7 @@
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-logger": "^3.0.9",
     "@types/redux-saga": "^0.10.5",
-    "antd": "^4.18.5",
+    "antd": "^4.19.2",
     "express": "^4.17.2",
     "normalize.css": "^8.0.1",
     "react": "^18.0.0-rc.2",

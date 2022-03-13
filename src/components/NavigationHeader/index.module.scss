@@ -1,0 +1,29 @@
+.normal{
+    background: #222 linear-gradient(135deg,transparent,rgba(0,0,0,.7));
+    position: relative;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    // align-items: center;
+    :global{
+        .logo{
+            float: left;
+            width: 120px;
+            height: 31px;
+            margin: 16px 24px 16px 0;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .ant-row-rtl #components-layout-demo-top-side-2 .logo {
+            float: right;
+            margin: 16px 0 16px 24px;
+          }
+          
+          .site-layout-background {
+            background: #fff;
+          }
+
+        
+       
+    }
+}
