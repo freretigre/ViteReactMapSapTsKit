@@ -46,7 +46,7 @@ const RouterRoot = () => {
 
 
 
-const Routers = memo(() => {
+export const Routers = memo(() => {
     return (
         <BrowserRouter>
             <RouterRoot />
@@ -54,7 +54,6 @@ const Routers = memo(() => {
     );
 });
 
-export default Routers;
 
 
 
