@@ -3,9 +3,12 @@
 
 # 本脚手架使用到的如下库
 ```
-react antd ts cssModule less/scss react-router-dom-v6.0 @reduxjs/toolkit react-redux redux-Saga rxjs
+react antd ts cssModule less/scss react-router-dom-v6.0 @reduxjs/toolkit react-redux redux-Saga rxjs react-snap
 
 ```
+
+# 使用预渲染机制打包成完成的 HTML 源码标签
+- https://github.com/stereobooster/react-snap
 
 # antd 按需加载配置说明文档 
 ```

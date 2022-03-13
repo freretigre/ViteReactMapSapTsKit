@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "snap": "tsc && vite build && react-snap",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "react-dom": "^18.0.0-rc.2",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
+    "react-snap": "^1.23.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.1.3",
@@ -37,5 +39,12 @@
     "stylus": "^0.56.0",
     "typescript": "^4.4.4",
     "vite": "^2.7.2"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    }
   }
 }
