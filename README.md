@@ -244,3 +244,140 @@ git 分支分为集成分支、功能分支和修复分支，分别命名为 dev
 二.git 提交记录规范
 每个 git commit 记录都需要按照固定格式，具体格式为： 第一行：作者: 功能模块名称（或 功能模块ID） 第二行：提交描述，中英文皆可 + ： 增加代码 * ： 修改代码 - ： 删除代码
 ```
+
+# react-v18
+```jsx
+大家好，我是 ConardLi，今天给大家带来一个令人兴奋的消息：React 18 RC 版本发布啦！
+
+去年6月份 React 18 发布 alpha 版本的时候，我已经第一时间试用，并且给大家分享了一波：【第一批吃螃蟹】试用 React 18 ！
+
+不过 alpha 毕竟还是属于内部测试版本，可能还包括一些 bug，功能也有很多没放出来，大家不能在生产里去用。
+
+这次发布的是 RC 版本(Release Candidate候选版本）：基本和最终发布的 stable 版本一样，功能上不会再有太大变化，也更加稳定，大家可以尝试在生产环境里用起来了 ～
+
+安装
+安装最新的 React 18 RC 版本：
+
+npm install react@rc react-dom@rc
+客户端渲染 API 的更新
+如果你是第一次安装 React 18 ，可能会在控制台看到一个警告：
+
+Use createRoot instead. Until you switch to the new API, your app will behave as if it’s running React 17. Learn more: https://reactjs.org/link/switch-to-createroot
+这是因为 React 18 中引入了一个新的 Root API，它支持了最新的 concurrent renderer，让你可以自己决定是否启用并发渲染的能力。
+
+// 以前
+import { render } from 'react-dom';
+const container = document.getElementById('app');
+render(<App tab="home" />, container);
+
+// 现在
+import { createRoot } from 'react-dom/client';
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<App tab="home" />);
+同时，unmountComponentAtNode 也改为了 root.unmount：
+
+// 以前
+unmountComponentAtNode(container);
+
+// 现在
+root.unmount();
+另外，React 还将之前 render 函数的回调函数干掉了，因为通常它在配合 Suspense 一起使用的时候得不到预期的效果：
+
+// 以前
+const container = document.getElementById('app');
+ReactDOM.render(<App tab="ConardLiHome" />, container, () => {
+  console.log('rendered');
+});
+
+// 现在
+function AppWithCallbackAfterRender() {
+  useEffect(() => {
+    console.log('rendered');
+  });
+
+return <App tab="ConardLiHome" />
+}
+
+const container = document.getElementById('app');
+const root = ReactDOM.createRoot(container);
+root.render(<AppWithCallbackAfterRender />);
+还有一点， 如果你之前用了带 hydrate 的服务端渲染，需要升级到：hydrateRoot：
+
+// 以前
+import { hydrate } from 'react-dom';
+const container = document.getElementById('app');
+hydrate(<App tab="home" />, container);
+
+// 现在
+import { hydrateRoot } from 'react-dom/client';
+const container = document.getElementById('app');
+const root = hydrateRoot(container, <App tab="home" />);
+服务端渲染 API 的更新
+在这个版本中，React 为了完全支持服务端的 Suspense 和流式SSR，改进了 react-dom/server 的 API，旧的 Node.js 流式 API 将会被完全弃用：
+
+renderToNodeStream 弃用⛔️️，使用时将发出警告。
+对应新版 Node 环境的流式传输 API 为：renderToPipeableStream。
+另外，React 在这个版本还引入了新的 renderToReadableStream 来支持 Deno、Cloudflare worker 等其他环境的流式 SSR 和 Suspense。
+
+renderToString、renderToStaticMarkup 这两个 API 还可以继续用，但是对 Suspense 支持就不那么友好了。
+
+想了解更多，可以看 React 18 官方工作组的博客：https://github.com/reactwg/react-18/discussions/22
+批处理
+React 中的批处理简单来说就是将多个状态更新合并为一次重新渲染，由于设计问题，在 React 18 之前，React 只能在组件的生命周期函数或者合成事件函数中进行批处理。默认情况下，Promise、setTimeout 以及其他异步回调是无法享受批处理的优化的。
+
+// React 18 之前
+
+function handleClick() {
+  setCount(c => c + 1);
+  setName('ConardLi');
+  // 在合成事件中，享受批处理优化，只会重新渲染一次
+}
+
+setTimeout(() => {
+  setCount(c => c + 1);
+  setName('ConardLi');
+  // 不会进行批处理，会触发两次重新渲染
+}, 1000);
+从 React 18 开始，如果你使用了 createRoot，所有的更新都会享受批处理的优化，包括Promise、setTimeout 以及其他异步回调函数中。
+
+// React 18 
+
+function handleClick() {
+  setCount(c => c + 1);
+  setName('ConardLi');
+  // 只会重新渲染一次
+}
+
+setTimeout(() => {
+  setCount(c => c + 1);
+  setName('ConardLi');
+  // 只会重新渲染一次
+}, 1000);
+如果你有特殊的渲染需求，不想进行批处理，也可以使用 flushSync 手动退出：
+
+import { flushSync } from 'react-dom';
+
+function handleClick() {
+  flushSync(() => {
+    setCounter(c => c + 1);
+  });
+  // 更新 DOM
+  flushSync(() => {
+    setFlag(f => !f);
+  });
+  // 更新 DOM
+}
+想了解更多可以看 React 18 官方工作组的博客：https://github.com/reactwg/react-18/discussions/21
+用于第三方库的 API
+React 18 的更新机制对于很多第三方 React 库都是阻断性的，如果想要适配 React 18，这些库可能要通过下面这些 API 做一些改造：
+
+useId 是一个新的 Hook，用于在客户端和服务端生成唯一id，同时避免 hydration 的不兼容，这可以解决 React 17 以及更低版本的问题。
+useSyncExternalStore 是一个新的 Hook，它允许外部存储通过强制同步更新来支持并发读取。推荐把这个新的 API 推荐应用到任何与 React 外部状态集成的库。
+useInsertionEffect 是一个新的 Hook，它可以解决 CSS-in-JS 库在渲染中动态注入样式的性能问题。
+放弃对 IE 的支持
+图片
+在这个版本中，React 正式放弃了对 Internet Explorer 的支持。如果你的业务在 IE 还有用户，只能继续使用 React 17 及以下的版本了～。
+
+如果大家想了解更多内容，欢迎查看 React 官方博客：https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
+```
