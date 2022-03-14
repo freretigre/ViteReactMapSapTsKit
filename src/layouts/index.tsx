@@ -1,10 +1,11 @@
-import { memo, FC, PropsWithChildren, Suspense, lazy } from 'react';
+import { memo, FC, PropsWithChildren, Suspense, lazy, useEffect } from 'react';
 import {
     Link,
     Outlet,
 } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { initRemSize } from '../utils';
 
 const { Content, Footer } = Layout;
 
@@ -14,6 +15,16 @@ import NavigationSider from '../components/NavigationSider';
 import NavigationMenu from '../components/NavigationMenu';
 
 const Layouts = memo(() => {
+
+    useEffect(() => {
+        initRemSize({
+            callback: (sizeVal: number) => {
+                console.log("initRemSize: ", sizeVal);
+                
+            }
+        });
+    }, []);
+    
     return (
         <Layout>
             <NavigationHeader />
