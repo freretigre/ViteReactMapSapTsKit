@@ -1,0 +1,24 @@
+.normal{
+    background: #111;
+    height: 600px;
+    min-height: 600px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    :global{
+        .content{
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            height: 600px;
+            min-height: 600px;
+            background: url(../../assets/img/c4x4.png);
+            background-size: auto;
+        }
+        .background{
+            width: 100vw;
+            z-index: 1;
+        }
+    }
+}
