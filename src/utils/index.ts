@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 
+// PC/移动端 REM 多端适配
 interface IinitRemSize {
     cab: Function;
 }
