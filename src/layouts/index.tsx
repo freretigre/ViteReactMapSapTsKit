@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { initRemSize } from '../utils';
+import { initRootRemSizeNew } from '../utils';
 
 const { Content, Footer } = Layout;
 
@@ -17,7 +17,7 @@ import NavigationMenu from '../components/NavigationMenu';
 const Layouts = memo(() => {
 
     useEffect(() => {
-        initRemSize({
+        initRootRemSizeNew({
             callback: (sizeVal: number) => {
                 console.log("initRemSize: ", sizeVal);
                 

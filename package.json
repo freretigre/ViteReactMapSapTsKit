@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
+    "@types/events": "^3.0.0",
     "@types/express": "^4.17.13",
     "@types/react": "^17.0.40",
     "@types/react-redux": "^7.1.22",
@@ -16,6 +17,7 @@
     "@types/redux-logger": "^3.0.9",
     "@types/redux-saga": "^0.10.5",
     "antd": "^4.19.2",
+    "events": "^3.3.0",
     "express": "^4.17.2",
     "normalize.css": "^8.0.1",
     "react": "^18.0.0-rc.2",

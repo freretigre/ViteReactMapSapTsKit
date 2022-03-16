@@ -1,10 +1,10 @@
-const EventEmitter = require('events');
+import EventEmitter from 'events';
 
 // PC/移动端 REM 多端适配
 interface IinitRemSize {
-    cab: Function;
+    callback: Function;
 }
-export const initRootRemSizeNew = ({ cab }: IinitRemSize) => {
+export const initRootRemSizeNew = ({ callback }: IinitRemSize): void => {
     const flag: boolean = false;
     function initResize() {
         // 默认的设计稿宽度 1920px
@@ -27,7 +27,7 @@ export const initRootRemSizeNew = ({ cab }: IinitRemSize) => {
             designSize = cw;
         }
 
-        cab(cw);
+        callback(cw);
 
         if(flag){
             const remSize = (cw / designSize) * 100;
@@ -115,13 +115,13 @@ export const isMobile = (): boolean => {
 
 export interface IeventRun {
     currentEle: any;
-    eventMethod: Function;
+    eventMethod: any;
     data: Object;
     callback: Function;
 }
 export const eventRun = ({currentEle, eventMethod, data, callback}: IeventRun) => {
     const event = new EventEmitter();
-    const videoMessage = (msg) => {
+    const videoMessage = (msg: string): void => {
         callback({
             ele: currentEle, // 元素
             message: msg,    // 消息
