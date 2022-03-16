@@ -60,6 +60,7 @@ export default defineConfig({
             },
         },
     },
+    base: './',
     server: {
         port: 8089, // 默认端口号是 3000，这里我修改成 8088，主要是为了不和其它框框架端口号发生冲突
         cors: true, // 为开发服务器配置 CORS。默认启用并允许任何源，传递一个 选项对象 来调整行为或设为 false 表示禁用。
