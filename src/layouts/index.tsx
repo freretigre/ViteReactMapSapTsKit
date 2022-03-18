@@ -38,7 +38,7 @@ const Layouts = memo(() => {
                         padding: 0,
                         margin: 0,
                         minHeight: 280,
-                        overflow: 'scroll'
+                        // overflow: 'scroll'
                     }}
                     >
                      <Outlet />
